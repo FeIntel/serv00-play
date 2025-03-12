@@ -1,10 +1,11 @@
+
 name: 批量保活进程
 
 on:
   schedule:
     # 使用cron表达式定义任务运行的时间
     # github使用utc时间
-    - cron: '3 22 * * *' #北京时间6点
+    - cron: '*/30 * * * *' #北京时间6点
   workflow_dispatch:
 
 jobs:
@@ -19,7 +20,6 @@ jobs:
         run: |
           sudo apt-get install sshpass
           sudo apt-get install jq
-
       - name: 登录各个serv00并执行保活脚本
         env:
           HOSTS_JSON: ${{ secrets.HOSTS_JSON }}
